@@ -3,7 +3,7 @@ jobs:
   test:
     timeout-minutes: 2
     runs-on: ubuntu-latest
-    container: ubuntu:21.10
+    container: ubuntu:21.04
     steps:
       - uses: actions/checkout@v2
       - run: apt-get update && apt-get install -y --no-install-recommends clang libgstreamer1.0-0
