@@ -1,12 +1,12 @@
 on: push
 jobs:
   test:
-    timeout-minutes: 2
+    timeout-minutes: 1
     runs-on: ubuntu-latest
     container: ubuntu:21.10
     steps:
       - uses: actions/checkout@v2
-      - run: apt-get update && apt-get install -y --no-install-recommends clang libgstreamer1.0-0
+      - run: apt-get update && apt-get install -y --no-install-recommends clang libgstreamer1.0-0 strace
       - run: printf "void gst_init(int *argc, char ***argv); int main(void) { gst_init(0, 0); }" > test.c
       - run: clang test.c /usr/lib/x86_64-linux-gnu/libgstreamer-1.0.so.0
-      - run: ./a.out
+      - run: strace -f ./a.out
